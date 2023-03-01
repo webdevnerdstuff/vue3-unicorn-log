@@ -1,8 +1,9 @@
 export interface OptionsSettings {
-	array?: (string[] | number[]);
+	array?: string[] | number[];
 	defaultStyles?: object;
 	disabled?: boolean;
 	globalOptions?: boolean;
+	logOutput?: string[];
 	logPrefix?: boolean | string;
 	magical?: boolean;
 	name?: string;

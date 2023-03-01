@@ -13,17 +13,15 @@ const magicalStyleNames: string[] = [
 
 
 class BuildOutput {
-	private options: OptionsSettings;
+	public options: OptionsSettings;
 	private defaultStyles: DefaultStyles;
-	private callback: (msg: string, msgType: string) => void = () => { };
+	private callback: () => void = () => { };
 	public errors = false;
+	public outputResults = null;
 
-	constructor(options: OptionsSettings, defaultStyles: DefaultStyles, callback: (msg: string, msgType: string) => void) {
-		console.log('BuildOutput', { options, defaultStyles });
-
+	constructor(options: OptionsSettings, defaultStyles: DefaultStyles) {
 		this.options = options;
 		this.defaultStyles = defaultStyles;
-		this.callback = callback;
 	}
 
 
@@ -70,7 +68,8 @@ class BuildOutput {
 	// Build the output //
 	output() {
 		const options = this.options;
-		const results = ['%c%s', options.styles];
+		const resultsBase = ['%c%s', options.styles];
+		const results = [];
 
 		// Build the output results //
 		if (options.text) {
@@ -85,12 +84,23 @@ class BuildOutput {
 			results.push(options.objects);
 		}
 
-		return results;
+		const outputResults = [...resultsBase, ...results];
+
+		this.options.logOutput = outputResults;
 	}
 }
 
 export default {
-	run(defaultStyles: DefaultStyles) {
-		console.log('build', defaultStyles);
+	run(options: OptionsSettings, defaultStyles: DefaultStyles) {
+		const output = new BuildOutput(options, defaultStyles);
+		const propertyNames = Object.getOwnPropertyNames(BuildOutput.prototype);
+
+		Object.values(propertyNames).map((functionName) => {
+			if (functionName !== 'constructor') {
+				output[functionName]();
+			}
+		});
+
+		return output.options;
 	},
 };

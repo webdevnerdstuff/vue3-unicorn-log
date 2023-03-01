@@ -9,15 +9,26 @@ const $unicornLog = inject('$unicornLog');
 $unicornLog({
 	// text: 90,
 	// type: 'table',
-	// logPrefix: 6666,
-	// array: 23,
+	// styles: 'content: "CONTENT XXXXX";',
+	logPrefix: 'SOME SHIT',
+	// magical: true,
+	array: 'foo',
 	// disabled: true,
 	// text: 'Hello World',
+	// styles: 'color: red; font-size: 20px;',
 	// objects: {
-	// 	foo: 'bar',
+	// 	foobar: 'foobar',
 	// },
-	// array: ['foo', 'bar'],
+	// array: ['MOO', 'COW'],
 	name: 'LOCAL OPTION'
+});
+
+const foo = { foo: 'foo ' };
+const bar = { bar: 'bar ' };
+
+$unicornLog({
+	text: 'Hello World',
+	objects: { ...foo, ...bar },
 });
 // });
 

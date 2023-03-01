@@ -1,25 +1,43 @@
 // import { ref } from 'vue';
 import { OptionsSettings } from '@/types';
 
+const logTypes: string[] = [
+	'clear',
+	'count',
+	'countReset',
+	'debug',
+	'dir',
+	'error',
+	'group',
+	'groupCollapsed',
+	'groupEnd',
+	'info',
+	'log',
+	'table',
+	'time',
+	'timeEnd',
+	'timeLog',
+	'trace',
+	'warn',
+];
+
 
 class ValidateOptions {
 	private options: OptionsSettings = {};
-	private types: string[] = [];
 	private callback: (msg: string, msgType: string) => void = () => { };
 	public errors = false;
 
-	constructor(options: OptionsSettings, types: string[], callback: (msg: string, msgType: string) => void) {
-		console.log('ValidateStuff', { options, types });
+	constructor(options: OptionsSettings, callback: () => void) {
+		console.log('ValidateStuff', { options });
 
 		this.options = options;
-		this.types = types;
 		this.callback = callback;
 	}
 
 	type() {
 		console.log('type', this.options.type);
 
-		if (!this.types.includes(this.options.type)) {
+		if (!logTypes.includes(this.options.type)) {
 
 			if (this.options.type === 'dirXml') {
 				this.errors = true;
@@ -92,8 +110,9 @@ class ValidateOptions {
 }
 
 export default {
-	run(options: OptionsSettings, types: string[], callback: (message: '', messageType: '') => void) {
-		const validation = new ValidateOptions(options, types, callback);
+	run(options: OptionsSettings, callback: () => void) {
+		console.log('validator', { callback });
+		const validation = new ValidateOptions(options, callback);
 		const propertyNames = Object.getOwnPropertyNames(ValidateOptions.prototype);
 
 		Object.values(propertyNames).map((functionName) => {
