@@ -33,7 +33,6 @@ const rainbowLinearGradient = `linear-gradient(to right,
 
 class UnicornLogger {
 	private pluginOptions: OptionsSettings = { ...globalOptions };
-	private name = ref('UnicornLog');
 	private logOutput = ref([]);
 	private defaultStyles: DefaultStyles = {
 		log: [
@@ -173,12 +172,9 @@ class UnicornLogger {
 
 
 	// ========================================== Unicorn Logger //
-	// TODO: Need to fix `this` //
 	logger(msg = 'An error has occurred.', logType = 'log'): void {
 		const label = logType.charAt(0).toUpperCase() + logType.slice(1);
 		let style = '';
-
-		console.log('logger', this);
 
 		if (logType === 'error') {
 			this.errors.value = true;
@@ -188,15 +184,13 @@ class UnicornLogger {
 			style = this.defaultStyles.info.join(';');
 		}
 
-		console[logType]('%c%s', style, `[${this.name.value} ${label}]: ${msg}`);
+		console[logType]('%c%s', style, `[UnicornLog ${label}]: ${msg}`);
 	}
 }
 
 
 // ========================================== Export //
-const UnicornLog = (options: OptionsSettings) => {
-	console.log('START', { options });
-
+const UnicornLog = (options: OptionsSettings = {}) => {
 	// Set Global Options //
 	if (options.globalOptions) {
 		globalOptions = { ...globalOptions, ...options };

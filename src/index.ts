@@ -1,12 +1,9 @@
 import { App, Plugin } from 'vue';
 import { UnicornLog } from '@/plugin';
+import { OptionsSettings } from '@/types';
 
 const UnicornLogPlugin = {
-	install(app: App, options) {
-		console.log('=============================== install');
-		// console.log('app', { app });
-		// console.log('options', { options });
-		// console.log('this.options', this.options);
+	install(app: App, options: OptionsSettings) {
 		app.provide('$unicornLog', UnicornLog);
 
 		const allOptions = { globalOptions: true, ...options };

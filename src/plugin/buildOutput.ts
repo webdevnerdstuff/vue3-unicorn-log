@@ -1,6 +1,5 @@
 import { DefaultStyles, OptionsSettings } from '@/types';
 
-
 const magicalStyleNames: string[] = [
 	'magic',
 	'magical',
