@@ -7,6 +7,9 @@ import vue from '@vitejs/plugin-vue';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
 import { fileURLToPath, URL } from 'node:url';
+import scss from 'rollup-plugin-scss';
+import postcss from 'rollup-plugin-postcss';
+import terser from '@rollup/plugin-terser';
 
 const banner = `/**
  * @name ${pkg.name}
@@ -72,5 +75,11 @@ export default {
 		vue({
 			defaultLang: { script: 'ts' }
 		}),
+		postcss({
+			modules: true,
+			extract: true
+		}),
+		scss(),
+		terser(),
 	],
 };

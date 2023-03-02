@@ -69,13 +69,13 @@ module.exports = {
 		'no-const-assign': 'error',
 		'no-debugger': 0,
 		'no-new': 0,
-		'no-unused-vars': ['warn'],
+		'no-unused-vars': 1,
 		'no-use-before-define': 0,
 		'no-useless-escape': 0,
 		'no-param-reassign': [
 			'error', {
 				props: true,
-				ignorePropertyModificationsFor: ['app', 'field', 'model', 'el', 'item', 'state', 'Vue', 'vue'],
+				ignorePropertyModificationsFor: ['field', 'model', 'el', 'item', 'state', 'Vue', 'vue'],
 			},
 		],
 		'no-underscore-dangle': [

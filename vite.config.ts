@@ -1,13 +1,24 @@
-import { defineConfig } from 'vite';
-import eslint from 'vite-plugin-eslint';
 import vue from '@vitejs/plugin-vue';
+import babel from 'vite-plugin-babel';
+import eslint from 'vite-plugin-eslint';
+import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
+import StylelintPlugin from 'vite-plugin-stylelint';
+
 
 export default defineConfig({
 	base: '/vue3-unicorn-log/',
+	build: {
+		outDir: 'docs',
+	},
 	plugins: [
 		eslint({
 			fix: true,
+		}),
+		babel(),
+		StylelintPlugin({
+			fix: true,
+			include: ['src/**/*.{css,scss,sass,vue}'],
 		}),
 		vue(),
 	],
@@ -24,9 +35,6 @@ export default defineConfig({
 			'.tsx',
 			'.vue',
 		],
-	},
-	build: {
-		outDir: 'docs',
 	},
 	server: {
 		open: true,
