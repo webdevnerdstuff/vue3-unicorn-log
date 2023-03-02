@@ -8,6 +8,7 @@ const UnicornLogPlugin = {
 
 		const allOptions = { globalOptions: true, ...options };
 
+		// eslint-disable-next-line no-param-reassign
 		app.config.globalProperties.$unicornLog = UnicornLog(allOptions);
 	},
 };
