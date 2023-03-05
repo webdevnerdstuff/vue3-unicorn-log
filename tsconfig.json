@@ -31,9 +31,15 @@
 		"noEmit": true
 	},
 	"types": [
-		"lodash",
 		"node"
 	],
+	"exclude": [
+        "src/App.vue",
+        "src/main.ts",
+		"src/components/**/*.ts",
+		"src/components/**/*.vue",
+		"node_modules"
+    ],
 	"include": [
 		"src/**/*.ts",
 		"src/**/*.vue",
