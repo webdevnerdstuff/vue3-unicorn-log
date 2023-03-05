@@ -5,7 +5,7 @@
 	"private": false,
 	"main": "dist/vue3-unicorn-log.js",
 	"module": "dist/vue3-unicorn-log.es.js",
-	"types": "dist/plugin/index.d.ts",
+	"types": "dist/types/index.d.ts",
 	"scripts": {
 		"dev": "vite",
 		"watch": "pnpm dev",
