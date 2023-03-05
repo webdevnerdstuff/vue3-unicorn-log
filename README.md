@@ -19,7 +19,7 @@
 
 ## Description
 
-The `vue3-unicorn-log` is a 🦄 plugin to make coloring the console output easier and more flexible. Component is for Vuetify v3. Plugin version for Vue 2 can be found [here](https://github.com/webdevnerdstuff/vue-unicorn-log).
+The `vue3-unicorn-log` is a 🦄 plugin to make coloring the console output easier and more flexible. Plugin version for Vue 2 can be found [here](https://github.com/webdevnerdstuff/vue-unicorn-log).
 
 
 ## Installation
