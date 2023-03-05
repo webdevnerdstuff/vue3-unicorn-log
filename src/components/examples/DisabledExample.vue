@@ -72,7 +72,7 @@ const disabledCode = `$unicornLog({
 
 const disabledEnvCode = `$unicornLog({
 	text: 'Hello World',
-	disabled: process.env.UNICORN_LOG !== 'true',
+	disabled: process\u200b.env.UNICORN_LOG !== 'true',
 });`;
 
 function disabledExample() {
