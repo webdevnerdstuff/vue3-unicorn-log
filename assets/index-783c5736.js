@@ -132,6 +132,7 @@ const app = createApp(App);
 
 app.use(UnicornLog, {
 	logPrefix: '[OMG LOOK HERE!]:',
+	disabled: process​.env.UNICORN_LOG !== 'true',
 	// ...other options
 });
 
