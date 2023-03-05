@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Unicorn" width="256" src="https://github.com/webdevnerdstuff/vue3-unicorn-log/raw/main/docs/images/unicorn.svg">
+  <img alt="Unicorn" width="256" src="https://github.com/webdevnerdstuff/vue3-unicorn-log/raw/main/public/unicorn.svg">
 </p>
 
 <p>
