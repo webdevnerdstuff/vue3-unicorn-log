@@ -4,7 +4,7 @@
 			<img
 				alt="Vue 3 UnicornLog by @WebDevNerdStuff"
 				class="img-fluid"
-				src="vue3-unicorn-log-social.jpg"
+				src="../../assets/vue3-unicorn-log-social.jpg"
 			/>
 		</div>
 	</div>

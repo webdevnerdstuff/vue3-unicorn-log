@@ -8,7 +8,7 @@
 					<img
 						alt="Vue 3 UnicornLog by @WebDevNerdStuff"
 						class="img-fluid unicorn-img"
-						src="unicorn.svg"
+						src="../assets/unicorn.svg"
 					/>
 				</div>
 			</div>
