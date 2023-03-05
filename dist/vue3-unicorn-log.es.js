@@ -1,6 +1,6 @@
 /**
  * @name vue3-unicorn-log
- * @version 1.0.0-beta
+ * @version 1.0.0
  * @description A magical 🦄 plugin to make coloring the console output easier and more flexible.
  * @author WebDevNerdStuff & Bunnies... lots and lots of bunnies! <webdevnerdstuff@gmail.com> (https://webdevnerdstuff.com)
  * @copyright Copyright 2023, WebDevNerdStuff
