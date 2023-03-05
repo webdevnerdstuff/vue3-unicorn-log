@@ -27,7 +27,7 @@ $unicornLog({
 	disabled: true,
 });`,r=`$unicornLog({
 	text: 'Hello World',
-	disabled: ({}).UNICORN_LOG !== 'true',
+	disabled: process​.env.UNICORN_LOG !== 'true',
 });`;function n(){a({text:"Hello World",disabled:e.value})}return(i,l)=>(X(),c2("div",null,[rf,t("div",nf,[t("div",lf,[B(o2,{code:s,lang:"javascript",onRun:n},{label:R2(()=>[t("div",tf,[r1(t("input",{"onUpdate:modelValue":l[0]||(l[0]=o=>e.value=o),checked:"",class:"form-check-input",role:"switch",type:"checkbox"},null,512),[[d4,e.value]]),t("label",of,[K("disabled = "),t("span",ff,f2(e.value),1)])])]),_:1})])]),t("div",uf,[t("div",mf,[B(o2,{code:r,lang:"javascript",showCopyButton:!1,showRunButton:!1,onRun:n},{label:R2(()=>[vf,hf]),_:1})])])]))}},Hf={class:"row mb-2"},df={class:"col-12"},zf={class:"my-0"},Vf={key:0,id:"logPrefix-simple-example",class:"row mb-4"},Mf={class:"col-12"},gf={key:1,id:"name-default-example",class:"row mb-4"},Cf=t("div",{class:"col-12 mb-2"},[K(" If "),t("code",null,"logPrefix"),K(" option is set as a "),t("span",{class:"option-type"},"Boolean"),K(" of "),t("span",{class:"boolean-style"},"true"),K(", it will use the default "),t("code",null,"name"),K(" option for the prefix. ")],-1),Lf={class:"col-12"},xf={class:"form-check form-switch"},bf={class:"form-check-label"},yf={class:"boolean-style"},Nf=t("code",null,"name",-1),wf={id:"name-example",class:"row mb-4"},Sf={class:"col-12"},kf={class:"form-check form-switch"},Af={class:"form-check-label"},_f={class:"boolean-style"},Pf=t("code",null,"name",-1),W8={__name:"LogPrefixExample",props:{isNameOption:{type:Boolean,default:!1,required:!1}},setup(c){const a=c,e=Q("$unicornLog"),s=V2("[Bunnies]:"),r=V2(!0),n=`$unicornLog({
 	text: 'Hello World',
 	logPrefix: '[Bunnies]:',
@@ -132,7 +132,6 @@ const app = createApp(App);
 
 app.use(UnicornLog, {
 	logPrefix: '[OMG LOOK HERE!]:',
-	disabled: ({}).UNICORN_LOG !== 'true',
 	// ...other options
 });
 
