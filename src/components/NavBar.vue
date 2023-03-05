@@ -1,7 +1,7 @@
 <template>
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-5">
 		<div class="container">
-			<a class="navbar-brand" :href="links.docs">🦄 Vue UnicornLog</a>
+			<a class="navbar-brand" :href="links.docs">🦄 Vue 3 UnicornLog</a>
 			<button
 				aria-controls="navbarSupportedContent"
 				aria-expanded="false"

@@ -2,9 +2,9 @@
 	<div class="row mb-5">
 		<div class="col-12 text-center">
 			<img
-				alt="Vue Unicorn Log by @WebDevNerdStuff"
+				alt="Vue 3 UnicornLog by @WebDevNerdStuff"
 				class="img-fluid"
-				src="vue-unicorn-log-social.jpg"
+				src="vue3-unicorn-log-social.jpg"
 			/>
 		</div>
 	</div>

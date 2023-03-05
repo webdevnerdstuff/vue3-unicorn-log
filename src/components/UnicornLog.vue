@@ -6,7 +6,7 @@
 			<div class="row mb-4">
 				<div class="col-12 text-center">
 					<img
-						alt="Vue 3 Unicorn Log by @WebDevNerdStuff"
+						alt="Vue 3 UnicornLog by @WebDevNerdStuff"
 						class="img-fluid unicorn-img"
 						src="unicorn.svg"
 					/>
@@ -14,7 +14,7 @@
 			</div>
 			<div class="row mb-3">
 				<div class="col-12 text-center">
-					<h1 class="rainbow-text">Vue 3 Unicorn Log</h1>
+					<h1 class="rainbow-text">Vue 3 UnicornLog</h1>
 				</div>
 				<div class="col-12 text-center">
 					<span class="badge bg-secondary rounded-pill">{{ version }}</span>
@@ -193,7 +193,7 @@ const rainbowLinearGradient = `linear-gradient(to right,
 
 function welcomeLog() {
 	$unicornLog({
-		text: 'Welcome to Vue 3 Unicorn Log... It\'s magical!',
+		text: 'Welcome to Vue 3 UnicornLog... It\'s magical!',
 		styles: [
 			`background: ${rainbowLinearGradient}`,
 			'color: #f7f7f7',

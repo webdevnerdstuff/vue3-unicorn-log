@@ -50,8 +50,6 @@
 <script setup lang="ts">
 import {
 	computed,
-	defineEmits,
-	defineProps,
 	onBeforeMount,
 	ref,
 	useSlots,
