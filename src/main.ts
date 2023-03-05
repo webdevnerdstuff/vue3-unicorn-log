@@ -8,13 +8,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fas);
 
-const app = createApp(App);
-
-app.use(UnicornLog, {
-	// disabled: true
-	// type: 'dirXml'
-});
-
-app.component('fa-icon', FontAwesomeIcon);
-
-app.mount('#app');
+createApp(App)
+	.use(UnicornLog)
+	.component('fa-icon', FontAwesomeIcon)
+	.mount('#app');
