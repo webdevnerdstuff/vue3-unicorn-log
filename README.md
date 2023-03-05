@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/vue3-unicorn-log">
-    <img src="https://img.shields.io/npm/v/vue3-unicorn-log?color=%23cb3837&logo=npm" alt="NPM Package">
+    <img src="https://img.shields.io/npm/v/vue3-unicorn-log?logo=npm" alt="NPM Package">
   </a>
   &nbsp;
   <a href="https://github.com/webdevnerdstuff/vue3-unicorn-log">
