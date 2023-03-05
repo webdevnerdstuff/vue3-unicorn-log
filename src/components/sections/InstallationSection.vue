@@ -5,11 +5,21 @@
 		</div>
 
 		<div class="col-12 mb-4">
-			<CodeBlock :code="pnpmCode" label="Using pnpm:" lang="plain" />
+			<CodeBlock
+				:code="pnpmCode"
+				label="Using pnpm:"
+				lang="plain"
+				:showRunButton="false"
+			/>
 		</div>
 
 		<div class="col-12">
-			<CodeBlock :code="npmCode" label="Using npm:" lang="plain" />
+			<CodeBlock
+				:code="npmCode"
+				label="Using npm:"
+				lang="plain"
+				:showRunButton="false"
+			/>
 		</div>
 	</div>
 </template>

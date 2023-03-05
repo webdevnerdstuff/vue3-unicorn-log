@@ -5,7 +5,11 @@
 		</div>
 
 		<div class="col-12">
-			<CodeBlock :code="asPluginGlobalCode" lang="javascript" />
+			<CodeBlock
+				:code="asPluginGlobalCode"
+				lang="javascript"
+				:showRunButton="false"
+			/>
 		</div>
 	</div>
 </template>

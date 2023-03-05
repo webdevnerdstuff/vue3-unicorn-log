@@ -9,16 +9,23 @@
 				:code="setupCode"
 				label="Composition API (setup)"
 				lang="javascript"
+				:showRunButton="false"
 			/>
 			<CodeBlock
 				:code="scriptSetupCode"
 				label="Composition API (script setup)"
 				lang="javascript"
+				:showRunButton="false"
 			/>
 		</div>
 
 		<div class="col-12">
-			<CodeBlock :code="optionsApi" label="Options API" lang="javascript" />
+			<CodeBlock
+				:code="optionsApi"
+				label="Options API"
+				lang="javascript"
+				:showRunButton="false"
+			/>
 		</div>
 	</div>
 </template>

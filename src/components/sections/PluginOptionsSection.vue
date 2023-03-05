@@ -105,6 +105,7 @@ defaultStyles: {
 				:code="overrideOptionsCode"
 				label="Overriding the plugin default options"
 				lang="javascript"
+				:showRunButton="false"
 			>
 				<template #label>
 					<h5 class="mb-0">Overriding the plugin default options</h5>
