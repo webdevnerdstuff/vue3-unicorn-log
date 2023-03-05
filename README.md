@@ -52,3 +52,5 @@ npm i vue3-unicorn-log
 
 Copyright (c) 2023 WebDevNerdStuff  
 Licensed under the [MIT license](https://github.com/webdevnerdstuff/vue3-unicorn-log/blob/main/LICENSE.md).
+
+![Vue 3 UnicornLog by @WebDevNerdStuff](https://github.com/webdevnerdstuff/vue3-unicorn-log/raw/main/public/vue3-unicorn-log-social.jpg)
