@@ -1,183 +1,331 @@
 <template>
-	<div class="code-block-container">
-		<div class="text-right copy-code-container">
-			<div v-if="!hideButton" class="copy-code-button" @click="copyCode">
-				<!-- <v-icon class="me-2" :class="iconClass" :icon="buttonIconValue" /> -->
-				{{ buttonTextValue }}
+	<div class="v-code-block-container v-code-block-mb-5">
+		<div class="v-code-block-container--header">
+			<div class="v-code-block-container--label v-code-block-pb-1">
+				<template v-if="slots.label">
+					<slot name="label" />
+				</template>
+				<template v-else>
+					{{ props.label }}
+				</template>
+			</div>
+
+			<div
+				class="v-code-block-container--tabs d-flex align-items-end"
+				:style="tabGroupStyle"
+			>
+				<div
+					v-if="showCopyButton"
+					class="v-code-block-container--tab"
+					@click="copyCode"
+				>
+					<div class="v-code-block-container--button-copy">
+						<fa-icon
+							v-if="showCopyIcons"
+							class="fa-fw v-code-block-me-1"
+							:class="iconClass"
+							:icon="buttonIconValue"
+						/>
+						{{ buttonTextValue }}
+					</div>
+				</div>
+
+				<div
+					v-if="showRunButton"
+					class="v-code-block-container--tab"
+					@click="runCode"
+				>
+					<div class="v-code-block-container--button-run">Run</div>
+				</div>
 			</div>
 		</div>
-
-		<div>
-			<pre :class="`language-${lang}`">
-<code :class="`language-${lang}`" v-html="renderCode"></code>
+		<div class="v-code-block-container--code">
+			<pre :class="`language-${props.lang}`" :style="codeBlockStyles">
+				<code :class="`language-${props.lang}`" v-html="renderCode"></code>
 			</pre>
 		</div>
 	</div>
 </template>
 
-<script>
+<script setup lang="ts">
+import {
+	computed,
+	defineEmits,
+	defineProps,
+	onBeforeMount,
+	ref,
+	useSlots,
+} from 'vue';
 import Prism from 'prismjs';
 
 
-export default {
-	name: 'CodeBlock',
-	props: {
-		code: {
-			type: [Object, Array, String, Number],
-			required: true,
-		},
-		copyIcon: {
-			type: String,
-			required: false,
-			default: 'mdi mdi-content-copy',
-		},
-		copyText: {
-			type: String,
-			required: false,
-			default: 'Copy Code',
-		},
-		failedIcon: {
-			type: String,
-			required: false,
-			default: 'mdi mdi-close',
-		},
-		hideButton: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		indent: {
-			type: Number,
-			required: false,
-			default: 4,
-		},
-		lang: {
-			type: String,
-			required: false,
-			default: 'javascript',
-		},
-		successIcon: {
-			type: String,
-			required: false,
-			default: 'mdi mdi-check',
-		},
+// -------------------------------------------------- Emits & Slots //
+const emit = defineEmits(['copied', 'run']);
+const slots = useSlots();
+
+
+// -------------------------------------------------- Props //
+const props = defineProps({
+	code: {
+		type: [Object, Array, String, Number],
+		required: true,
 	},
-	data: () => ({
-		buttonIconValue: '',
-		buttonTextValue: '',
-		convertedCode: '',
-		copying: false,
-		html: '',
-		iconClass: 'mdi-content-copy',
-		themeUpdated: false,
-	}),
-	computed: {
-		renderCode() {
-			this.convertCode();
-			const html = Prism.highlight(this.convertedCode, Prism.languages[this.lang], this.lang);
-
-			return html;
-		},
+	codeBlockRadius: {
+		type: String,
+		required: false,
+		default: '0.5rem',
 	},
-	created() {
-		this.buttonTextValue = this.copyText;
-		this.buttonIconValue = this.copyIcon;
-
+	copyIcon: {
+		type: String,
+		required: false,
+		default: 'fa-solid fa-copy',
 	},
-	methods: {
-		convertCode() {
-			if (this.lang === 'json') {
-
-				this.convertedCode = JSON.stringify(this.code, null, this.indent);
-				return false;
-			}
-
-			this.convertedCode = this.code;
-			return false;
-		},
-		copyCode() {
-			if (this.copying) {
-				return false;
-			}
-
-			this.copying = true;
-
-			navigator.clipboard.writeText(this.convertedCode).then(() => {
-				this.buttonIconValue = this.successIcon;
-				this.buttonTextValue = 'Copied!';
-				this.iconClass = 'mdi-check';
-			}, (err) => {
-				this.buttonIconValue = this.failedIcon;
-				this.buttonTextValue = 'Copy failed!';
-				this.iconClass = 'mdi-close';
-				console.error('Copy to clipboard failed: ', err);
-			});
-
-			setTimeout(() => {
-				this.buttonIconValue = this.copyIcon;
-				this.buttonTextValue = this.copyText;
-				this.iconClass = 'mdi-content-copy';
-				this.copying = false;
-			}, 3000);
-		},
+	copyText: {
+		type: String,
+		required: false,
+		default: 'Copy Code',
 	},
-};
+	failedIcon: {
+		type: String,
+		required: false,
+		default: 'fa-solid fa-xmark',
+	},
+	indent: {
+		type: Number,
+		required: false,
+		default: 4,
+	},
+	label: {
+		type: String,
+		required: false,
+		default: 'Code Block',
+	},
+	lang: {
+		type: String,
+		required: false,
+		default: 'javascript',
+	},
+	showCopyButton: {
+		type: Boolean,
+		required: false,
+		default: true,
+	},
+	showCopyIcons: {
+		type: Boolean,
+		required: false,
+		default: true,
+	},
+	showRunButton: {
+		type: Boolean,
+		required: false,
+		default: true,
+	},
+	successIcon: {
+		type: String,
+		required: false,
+		default: 'fa-solid fa-check',
+	},
+	tabGap: {
+		type: String,
+		required: false,
+		default: '0.25rem',
+	}
+});
+
+
+// -------------------------------------------------- Data //
+const buttonIconValue = ref('');
+const buttonTextValue = ref('');
+const convertedCode = ref('');
+const copying = ref(false);
+const iconClass = ref('fa-solid fa-copy');
+
+
+// -------------------------------------------------- Computed //
+const codeBlockStyles = computed(() => {
+	const radius = props.codeBlockRadius;
+	let borderRadius = `${radius} 0 ${radius} ${radius}`;
+
+	if (!props.showCopyButton && !props.showRunButton) {
+		borderRadius = radius;
+	}
+
+	return {
+		borderRadius,
+	};
+});
+
+const renderCode = computed(() => {
+	convertCode();
+	const html = Prism.highlight(convertedCode.value, Prism.languages[props.lang], props.lang);
+
+	return html;
+});
+
+const tabGroupStyle = computed(() => {
+	return {
+		gap: props.tabGap,
+	};
+});
+
+
+// -------------------------------------------------- Before Mount //
+onBeforeMount(() => {
+	buttonTextValue.value = props.copyText;
+	buttonIconValue.value = props.copyIcon;
+});
+
+
+// -------------------------------------------------- Methods //
+function copyCode() {
+	if (copying.value) {
+		return false;
+	}
+
+	copying.value = true;
+
+	navigator.clipboard.writeText(convertedCode.value).then(() => {
+		buttonIconValue.value = props.successIcon;
+		buttonTextValue.value = 'Copied!';
+		iconClass.value = 'fa-solid fa-check';
+	}, (err) => {
+		buttonIconValue.value = props.failedIcon;
+		buttonTextValue.value = 'Copy failed!';
+		iconClass.value = 'fa-solid fa-xmark';
+		console.error('Copy to clipboard failed: ', err);
+	});
+
+	setTimeout(() => {
+		buttonIconValue.value = props.copyIcon;
+		buttonTextValue.value = props.copyText;
+		iconClass.value = 'fa-solid fa-copy';
+		copying.value = false;
+	}, 3000);
+}
+
+function convertCode() {
+	if (props.lang === 'json') {
+
+		convertedCode.value = JSON.stringify(props.code, null, props.indent);
+		return false;
+	}
+
+	convertedCode.value = props.code;
+	return false;
+}
+
+function runCode() {
+	emit('run');
+}
 </script>
 
-<style lang="scss">
+
+<style>
 @import 'prism-themes/themes/prism-night-owl.css';
+</style>
 
-.code-block-container {
-	display: block;
-	max-width: 100%;
-}
+<style lang="scss" scoped>
+.v-code-block {
+	&-container {
+		display: block;
+		max-width: 100%;
 
-.copy-code-container {
-	display: flex;
-	justify-content: flex-end;
-}
+		&--header {
+			align-items: end;
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
 
-.copy-code-button {
-	align-items: center;
-	// background-color: rgba(var(--v-theme-primary), 0.1);
-	border-radius: 5px 5px 0 0;
-	cursor: pointer;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	padding: 5px 15px;
-	text-align: center;
-	transition: background-color 0.35s ease;
-	width: fit-content;
+		&--tabs {
+			border: 1px solid transparent;
+		}
 
-	// &:hover {
-	// 	background-color: rgba(var(--v-theme-primary), 0.2);
-	// }
+		&--tab {
+			align-items: center;
+			background-color: rgba(var(--bs-primary-rgb), 0.1) !important;
+			border-radius: 5px 5px 0 0;
+			cursor: pointer;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			padding: 5px 15px;
+			text-align: center;
+			transition: background-color 0.35s ease;
+			width: fit-content;
 
-	.mdi {
-		font-size: 14px !important;
+			&:hover {
+				background-color: rgba(var(--bs-primary-rgb), 0.2) !important;
+			}
+		}
 
-		// &-content-copy {
-		// 	color: rgb(var(--v-theme-primary)) !important;
-		// }
+		&--button {
+			&-copy {
+				.fa-solid {
+					font-size: 14px !important;
 
-		// &-check {
-		// 	color: rgb(var(--v-theme-success));
-		// }
+					&.fa-copy {
+						color: var(--bs-primary) !important;
+					}
 
-		// &-close {
-		// 	color: rgb(var(--v-theme-error));
-		// }
+					&.fa-check {
+						color: var(--bs-success);
+					}
+
+					&.fa-xmark {
+						color: var(--bs-red);
+					}
+				}
+			}
+		}
+
+		&--code {
+			pre {
+				display: flex;
+
+				&[class*='language-'] {
+					background-color: #282c34;
+					margin-top: 0;
+				}
+			}
+		}
 	}
-}
 
-pre {
-	display: flex;
+	// Utilities //
+	@for $i from 1 through 5 {
+		// ----------------------------- MISC MARGIN //
+		&-mt-#{$i} {
+			margin-top: $i * 0.25rem !important;
+		}
 
-	&[class*='language-'] {
-		background-color: #282c34;
-		border-radius: 10px 0 10px 10px;
-		margin-top: 0;
+		&-me-#{$i} {
+			margin-right: $i * 0.25rem !important;
+		}
+
+		&-mb-#{$i} {
+			margin-bottom: $i * 0.25rem !important;
+		}
+
+		&-ms-#{$i} {
+			margin-left: $i * 0.25rem !important;
+		}
+
+		// ----------------------------- MISC PADDING //
+		&-pt-#{$i} {
+			padding-top: $i * 0.25rem !important;
+		}
+
+		&-pe-#{$i} {
+			padding-right: $i * 0.25rem !important;
+		}
+
+		&-pb-#{$i} {
+			padding-bottom: $i * 0.25rem !important;
+		}
+
+		&-ps-#{$i} {
+			padding-left: $i * 0.25rem !important;
+		}
 	}
 }
 </style>

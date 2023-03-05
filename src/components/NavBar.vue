@@ -41,6 +41,11 @@
 								</a>
 							</li>
 							<li>
+								<a class="dropdown-item" href="#ul-register-plugin"
+									>Register Plugin</a
+								>
+							</li>
+							<li>
 								<a class="dropdown-item" href="#ul-usage">Usage</a>
 							</li>
 
@@ -62,11 +67,6 @@
 							<!-- Methods -->
 							<li><h6 class="dropdown-header">Methods</h6></li>
 							<li>
-								<a class="dropdown-item" href="#ul-instance-methods">
-									Instance Methods
-								</a>
-							</li>
-							<li>
 								<a class="dropdown-item" href="#ul-console-methods">
 									Console Methods
 								</a>
@@ -74,6 +74,20 @@
 							<li><hr class="dropdown-divider" /></li>
 							<li>
 								<a class="dropdown-item" href="#ul-examples">Examples</a>
+							</li>
+
+							<li><hr class="dropdown-divider" /></li>
+							<li><h6 class="dropdown-header">Info</h6></li>
+							<li>
+								<a class="dropdown-item" href="#ul-dependencies">
+									Dependencies
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#ul-change-log">Change Log</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#ul-license">License</a>
 							</li>
 						</ul>
 					</li>
@@ -145,19 +159,8 @@
 	</nav>
 </template>
 
-<script>
+<script setup>
+import { inject } from 'vue';
 
-export default {
-	name: 'NavBar',
-	data: () => ({
-		links: {
-			docs: 'https://webdevnerdstuff.github.io/vue-unicorn-log/',
-			github: 'https://github.com/webdevnerdstuff/vue-unicorn-log',
-			npm: 'https://www.npmjs.com/package/vue-unicorn-log',
-		},
-	}),
-};
+const links = inject('links');
 </script>
-
-<style lang="scss">
-</style>

@@ -1,40 +1,6 @@
 
-<script setup lang="ts">
-import { inject } from 'vue';
-// import UnicornLog from './components/HelloWorld.vue';
+<script setup>
 import UnicornLog from './components/UnicornLog.vue';
-
-const $unicornLog = inject('$unicornLog');
-
-
-$unicornLog({
-	// text: 90,
-	type: 'log',
-	// styles: 'content: "CONTENT XXXXX";',
-	logPrefix: true,
-	// magical: true,
-	// array: 'foo',
-	// disabled: true,
-	// text: 'Hello World',
-	// styles: 'color: red; font-size: 20px;',
-	objects: {
-		foobar: 'foobar',
-	},
-	array: ['MOO', 'COW'],
-	// name: 'LOCAL OPTION'
-});
-
-const foo = { foo: 'foo ' };
-const bar = { bar: 'bar ' };
-
-$unicornLog({
-	text: 'Hello World',
-
-	objects: { ...foo, ...bar },
-});
-
-
-
 </script>
 
 <template>
