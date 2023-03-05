@@ -92,7 +92,8 @@
 </template>
 
 <script setup lang="ts">
-import { inject, onMounted, provide } from 'vue';
+import { inject, onMounted, provide, ref } from 'vue';
+import UAParser from 'ua-parser-js';
 import { name, version } from '../../package';
 import NavBar from '@/components/NavBar.vue';
 import {
@@ -110,15 +111,24 @@ import {
 } from '@/components/sections';
 
 
+
+
+
+
+
 const $unicornLog = inject('$unicornLog');
 
 onMounted(() => {
+	mobileCheck();
 	welcomeLog();
 });
 
 provide('styleData', {
 	h2ColClass: 'col-12 mb-4',
-	fieldWidth: 'width: 300px',
+	fieldWidth: {
+		maxWidth: '100%',
+		width: '300px',
+	},
 });
 
 provide('copyData', {
@@ -190,6 +200,18 @@ const rainbowLinearGradient = `linear-gradient(to right,
 	hsl(300, 100%, 50%),
 	hsl(360, 100%, 50%)
 )`;
+
+const isMobile = ref(false);
+
+function mobileCheck() {
+	const ua = UAParser();
+	const device = ua.device;
+	isMobile.value = device.type === 'mobile';
+}
+
+window.addEventListener("orientationchange", () => {
+	mobileCheck();
+});
 
 function welcomeLog() {
 	$unicornLog({
@@ -289,5 +311,17 @@ h4 {
 	border-style: solid;
 	border-width: 4px;
 	padding: 2rem;
+}
+
+.v-code-block {
+	&-container {
+		&--label {
+			&-mobile {
+				.form-check {
+					padding: 0;
+				}
+			}
+		}
+	}
 }
 </style>

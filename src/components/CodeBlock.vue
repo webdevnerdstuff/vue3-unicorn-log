@@ -1,7 +1,13 @@
 <template>
-	<div class="v-code-block-container v-code-block-mb-5">
-		<div class="v-code-block-container--header">
-			<div class="v-code-block-container--label v-code-block-pb-1">
+	<div
+		class="v-code-block-container v-code-block-mb-5"
+		:class="codeBlockClasses"
+	>
+		<div class="v-code-block-container--header" :style="headerStyles">
+			<div
+				class="v-code-block-container--label v-code-block-pb-1"
+				:class="labelClasses"
+			>
 				<template v-if="slots.label">
 					<slot name="label" />
 				</template>
@@ -15,7 +21,7 @@
 				:style="tabGroupStyle"
 			>
 				<div
-					v-if="showCopyButton"
+					v-if="showCopyButton && showButtons"
 					class="v-code-block-container--tab"
 					@click="copyCode"
 				>
@@ -31,7 +37,7 @@
 				</div>
 
 				<div
-					v-if="showRunButton"
+					v-if="showRunButton && showButtons && !isMobile"
 					class="v-code-block-container--tab"
 					@click="runCode"
 				>
@@ -51,10 +57,12 @@
 import {
 	computed,
 	onBeforeMount,
+	onMounted,
 	ref,
 	useSlots,
 } from 'vue';
 import Prism from 'prismjs';
+import UAParser from 'ua-parser-js';
 
 
 // -------------------------------------------------- Emits & Slots //
@@ -103,6 +111,11 @@ const props = defineProps({
 		required: false,
 		default: 'javascript',
 	},
+	showButtons: {
+		type: Boolean,
+		required: false,
+		default: true,
+	},
 	showCopyButton: {
 		type: Boolean,
 		required: false,
@@ -137,20 +150,35 @@ const buttonTextValue = ref('');
 const convertedCode = ref('');
 const copying = ref(false);
 const iconClass = ref('fa-solid fa-copy');
+const isMobile = ref(false);
 
 
 // -------------------------------------------------- Computed //
+const codeBlockClasses = computed(() => {
+	return isMobile.value ? 'v-code-block-container--mobile' : '';
+});
+
 const codeBlockStyles = computed(() => {
 	const radius = props.codeBlockRadius;
 	let borderRadius = `${radius} 0 ${radius} ${radius}`;
 
-	if (!props.showCopyButton && !props.showRunButton) {
+	if (!props.showButtons || (!props.showCopyButton && !props.showRunButton)) {
 		borderRadius = radius;
 	}
 
 	return {
 		borderRadius,
 	};
+});
+
+const headerStyles = computed(() => {
+	return {
+		gap: props.tabGap,
+	};
+});
+
+const labelClasses = computed(() => {
+	return isMobile.value ? 'v-code-block-container--label-mobile' : '';
 });
 
 const renderCode = computed(() => {
@@ -167,10 +195,14 @@ const tabGroupStyle = computed(() => {
 });
 
 
-// -------------------------------------------------- Before Mount //
+// -------------------------------------------------- Mount //
 onBeforeMount(() => {
 	buttonTextValue.value = props.copyText;
 	buttonIconValue.value = props.copyIcon;
+});
+
+onMounted(() => {
+	mobileCheck();
 });
 
 
@@ -212,14 +244,38 @@ function convertCode() {
 	return false;
 }
 
+function mobileCheck() {
+	const ua = UAParser();
+	const device = ua.device;
+	isMobile.value = device.type === 'mobile';
+}
+
+window.addEventListener("orientationchange", () => {
+	mobileCheck();
+});
+
 function runCode() {
 	emit('run');
 }
 </script>
 
 
-<style>
+<style lang="scss">
 @import 'prism-themes/themes/prism-night-owl.css';
+
+.v-code-block {
+	&-container {
+		&--label {
+			&-mobile {
+				input,
+				select,
+				textarea {
+					display: none;
+				}
+			}
+		}
+	}
+}
 </style>
 
 <style lang="scss" scoped>
@@ -233,6 +289,10 @@ function runCode() {
 			display: flex;
 			justify-content: space-between;
 			width: 100%;
+		}
+
+		&--label {
+			overflow: auto;
 		}
 
 		&--tabs {
@@ -250,6 +310,7 @@ function runCode() {
 			padding: 5px 15px;
 			text-align: center;
 			transition: background-color 0.35s ease;
+			white-space: nowrap;
 			width: fit-content;
 
 			&:hover {

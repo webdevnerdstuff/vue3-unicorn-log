@@ -46,6 +46,7 @@ specifiers:
   stylelint-order: ^6.0.2
   stylelint-scss: ^4.4.0
   typescript: ^4.9.3
+  ua-parser-js: ^1.0.34
   vite: ^4.1.0
   vite-plugin-babel: ^1.1.3
   vite-plugin-eslint: ^1.8.1
@@ -99,6 +100,7 @@ devDependencies:
   stylelint-order: 6.0.2_stylelint@15.2.0
   stylelint-scss: 4.4.0_stylelint@15.2.0
   typescript: 4.9.5
+  ua-parser-js: 1.0.34
   vite: 4.1.4_wlyq37gek244gc22rfb2kn6efu
   vite-plugin-babel: 1.1.3_7aqncydjsmbuegxcpud6ibdpd4
   vite-plugin-eslint: 1.8.1_eslint@8.35.0+vite@4.1.4
@@ -8586,6 +8588,10 @@ packages:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
+
+  /ua-parser-js/1.0.34:
+    resolution: {integrity: sha512-K9mwJm/DaB6mRLZfw6q8IMXipcrmuT6yfhYmwhAkuh+81sChuYstYA+znlgaflUPaYUa3odxKPKGw6Vw/lANew==}
     dev: true
 
   /unbox-primitive/1.0.2:

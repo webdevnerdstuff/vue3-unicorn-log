@@ -9,12 +9,7 @@
 		<!-- ======================= Simple Example -->
 		<div id="text-simple-example" class="row mb-4">
 			<div class="col-12">
-				<CodeBlock
-					:code="textCode"
-					label="Simple Example"
-					lang="javascript"
-					@run="textExample"
-				>
+				<CodeBlock :code="textCode" lang="javascript" @run="textExample">
 					<template #label>
 						<input
 							v-model="text"

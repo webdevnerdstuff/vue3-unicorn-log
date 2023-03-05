@@ -38,8 +38,7 @@
 				<CodeBlock
 					:code="disabledEnvCode"
 					lang="javascript"
-					:showCopyButton="false"
-					:showRunButton="false"
+					:showButtons="false"
 					@run="disabledExample"
 				>
 					<template #label>

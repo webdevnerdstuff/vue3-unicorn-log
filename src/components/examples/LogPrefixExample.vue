@@ -21,6 +21,7 @@
 							v-model="logPrefix"
 							class="form-control"
 							placeholder="[Bunnies]:"
+							:style="styleData.fieldWidth"
 							type="text"
 						/>
 					</template>
@@ -96,6 +97,7 @@ import CodeBlock from '@/components/CodeBlock.vue';
 
 
 const $unicornLog = inject('$unicornLog');
+const styleData = inject('styleData');
 
 const props = defineProps({
 	isNameOption: {
